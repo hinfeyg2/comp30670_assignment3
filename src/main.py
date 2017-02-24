@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 
 class LedSwitcher:
 
@@ -8,9 +9,12 @@ class LedSwitcher:
 		self.ledStateList = []
 
 	def parseFile(self):
+		
 		with open(self.filename) as f:
 			for line in f:
-				self.parseList.append(line.strip())
+				if len(line) > 1:
+					self.parseList.append(line.strip())
+		print(len(self.parseList), "parseList")
 		return self.parseList
 
 	def getSize(self):
@@ -18,12 +22,13 @@ class LedSwitcher:
 			return "List Empty"
 		else:
 			self.switchSize = int(self.parseList[0])
-			for i in range(0, self.switchSize):
+			for x in range(0, self.switchSize):
 				for y in range(0, self.switchSize):
-					self.ledStateList.append([False, y])
+					self.ledStateList.append([False, x, y])
 		return self.switchSize
 
 	def getParseLines(self):
+		
 		self.parseList.pop(0)
 		for i in range(0, len(self.parseList)):
 			lineSplitSpaceList = self.parseList[i].split(" ")
@@ -50,10 +55,7 @@ class LedSwitcher:
 				yEnd = lineSplitSpaceList[3].split(",")[1]
 				self.parseList[i] = [None, xStart, yStart, xEnd, yEnd]
 
-		# print(len(self.parseList))
 		return self.parseList
 
-# a = LedSwitcher("../test/testinputs/input_assign3.txt")
-# a.parseFile()
-# a.getSize()
-# print(a.getParseLines())
+
+
