@@ -70,3 +70,16 @@ class LedSwitcher:
 				self.parseList[i] = [None, xStart, yStart, xEnd, yEnd]
 
 		return self.parseList
+
+	def changeState(self, curX, curY, state):
+
+		Index = (curX * self.switchSize) + curY
+		
+		if state == None:
+			boolean = self.ledStateList[Index][0]
+			boolean ^= True
+			self.ledStateList[Index][0] = boolean
+		else:
+			self.ledStateList[Index][0] = state
+		self.ledStateList[Index][1] = curX
+		self.ledStateList[Index][2] = curY
