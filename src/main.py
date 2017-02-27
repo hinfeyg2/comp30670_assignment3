@@ -72,6 +72,7 @@ class LedSwitcher:
 		return self.parseList
 
 	def changeState(self, curX, curY, state):
+		"""a method for changing the state of the ledStateList with and an input position and state"""
 
 		Index = (curX * self.switchSize) + curY
 		
@@ -83,3 +84,18 @@ class LedSwitcher:
 			self.ledStateList[Index][0] = state
 		self.ledStateList[Index][1] = curX
 		self.ledStateList[Index][2] = curY
+
+	def applyValues(self):
+		for i in self.parseList:
+			x = []
+			y = []
+			state = []
+			for a in range(int(i[1]), int(i[3]) + 1):
+				for b in range(int(i[2]), int(i[4]) + 1):
+					x.append(a)
+					y.append(b)
+					state.append(i[0])
+
+			for i in range(len(x)):
+				self.changeState(x[i],y[i],state[i])
+			# return [len(x), len(y), len(state)]
