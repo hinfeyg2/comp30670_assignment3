@@ -99,3 +99,16 @@ class LedSwitcher:
 			for i in range(len(x)):
 				self.changeState(x[i],y[i],state[i])
 			# return [len(x), len(y), len(state)]
+			
+	def getResult(self):
+		x = []
+		y = []
+		counter = 0
+		for i, data in enumerate(self.ledStateList):
+			if data[0] == True:
+				counter = counter + 1
+				x.append(data[1])
+				y.append(data[2])
+		return counter
+		# plt.scatter(x, y, s=1, c='crimson')
+		# plt.show()
