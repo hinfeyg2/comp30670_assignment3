@@ -135,6 +135,14 @@ class LedSwitcher:
 				y.append(data[2])
 		return counter
 
+def main():
+	a = LedSwitcher(sys.argv[1])
+	a.parseFile()
+	a.getSize()
+	a.getParseLines()
+	a.applyValues()
+	print(a.getResult())
+
 if __name__ == '__main__':
 	a = LedSwitcher(sys.argv[1])
 	a.parseFile()
