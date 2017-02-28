@@ -57,7 +57,8 @@ class LedSwitcher:
 
 
 	def parseEachLine(self, x):
-
+		"""this file parses the data from each line and returns a list with the results."""
+		
 		x = x.strip()
 
 		if ", " in x:
@@ -109,6 +110,7 @@ class LedSwitcher:
 
 
 	def applyValues(self):
+		"""Apply the valus in the parseList to the ledStateList"""
 			for i in self.parseList:
 				x = []
 				y = []
@@ -124,6 +126,7 @@ class LedSwitcher:
 				# return [len(x), len(y), len(state)]
 
 	def getResult(self):
+		"""returns the result."""
 
 		x = []
 		y = []
@@ -136,6 +139,7 @@ class LedSwitcher:
 		return counter
 
 def main():
+	"""This function is used when running the setup.py entry points."""
 	a = LedSwitcher(sys.argv[1])
 	a.parseFile()
 	a.getSize()
@@ -144,6 +148,7 @@ def main():
 	print(a.getResult())
 
 if __name__ == '__main__':
+	"""Run this if its the root python file."""
 	a = LedSwitcher(sys.argv[1])
 	a.parseFile()
 	a.getSize()
