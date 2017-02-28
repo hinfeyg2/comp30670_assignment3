@@ -23,6 +23,11 @@ LedSwitcher {input_command_file}
 eg:
 LedSwitcher http://claritytrec.ucd.ie/~alawlor/comp30670/input_assign3.txt
 
+Tests
+To run the tests run /test/tests.py
+This will run all tests and will take a very long time.
+I advise you to comment out tests which you do not need.
+
 Structure
 The LedSwitcher class holds the complete program.
 LedSwitcher.py is also the entry point.
