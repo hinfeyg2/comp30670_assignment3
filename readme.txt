@@ -2,6 +2,9 @@ COMP30670: Software Engineering (Conversion) Semester II
 Assignment 3
 LedSwitcher
 
+Git Repository
+https://github.com/hinfeyg2/comp30670_assignment3
+
 The Science Centre is installing a new display board which is constructed from LED lights.
 The board is a square grid of LEDs which we control by sending commands to the unit to turn on or off certain rectangular regions.
 
