@@ -7,11 +7,11 @@ class Test(unittest.TestCase):
 
     # Testing each method...
 
-    def testGetResultSmall(self):
-        """Tests the whole program on a small custom data set."""
+    # def testGetResultSmall(self):
+    #     """Tests the whole program on a small custom data set."""
 
-        a = LedSwitcher("../test/testinputs/testLength5.txt")
-        self.assertTrue(a.parseFile() == 17)
+    #     a = LedSwitcher("../test/testinputs/testLength5.txt")
+    #     self.assertTrue(a.parseFile() == 17)
 
     # def testGetSize(self):
     #     """Asserts that the getSize method is working correctly"""
@@ -45,11 +45,11 @@ class Test(unittest.TestCase):
     #     self.a.parseFile()
     #     self.assertTrue(self.a.getResult() == 400410)
 
-    # def testGetResultAssign3Local(self):
-    #     """Test result against input files."""
+    def testGetResultAssign3Local(self):
+        """Test result against input files."""
 
-    #     self.a = LedSwitcher("../test/testinputs/input_assign3.txt")
-    #     self.assertTrue(self.a.parseFile() == 400410)
+        self.a = LedSwitcher("../test/testinputs/input_assign3.txt")
+        self.assertTrue(self.a.parseFile() == 400410)
 
     # def testGetResultAssign3a(self):
     #     """Test result against input files."""
