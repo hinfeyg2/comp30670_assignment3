@@ -1,6 +1,9 @@
-# COMP30670: Software Engineering (Conversion) Semester II #
-# Assignment 3 #
-# LedSwitcher #
+COMP30670: Software Engineering (Conversion) Semester II
+========================================================
+Assignment 3
+============
+LedSwitcher
+===========
 
 ## Git Repository ##
 https://github.com/hinfeyg2/comp30670_assignment3
