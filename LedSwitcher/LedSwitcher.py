@@ -94,11 +94,9 @@ class LedSwitcher:
 def main():
 	"""This function is used when running the setup.py entry points."""
 	a = LedSwitcher(sys.argv[1])
-	a.parseFile()
-	print(a.getResult())
+	print(a.parseFile())
 
 if __name__ == '__main__':
 	"""Run this if its the root python file."""
 	a = LedSwitcher(sys.argv[1])
-	a.parseFile()
-	print(a.getResult())
+	print(a.parseFile())
