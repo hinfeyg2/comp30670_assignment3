@@ -1,21 +1,23 @@
-COMP30670: Software Engineering (Conversion) Semester II
-Assignment 3
-LedSwitcher
+# COMP30670: Software Engineering (Conversion) Semester II #
+# Assignment 3 #
+# LedSwitcher #
 
-Git Repository
+## Git Repository ##
 https://github.com/hinfeyg2/comp30670_assignment3
+
+## Purpose ##
 
 The Science Centre is installing a new display board which is constructed from LED lights.
 The board is a square grid of LEDs which we control by sending commands to the unit to turn on or off certain rectangular regions.
 
 This program outputs the number of LEDs which are swiched on after implementing a set of commands
 
-Requirements
+## Requirements ##
 python 3
 unittest
 urllib
 
-Installation
+## Installation ##
 python setup.py install
 
 Usage
