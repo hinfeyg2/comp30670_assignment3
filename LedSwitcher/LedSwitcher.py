@@ -6,7 +6,7 @@ class LedSwitcher:
 	def __init__(self, filename):
 
 		self.filename = filename
-		self.setTest = set()
+		self.dictionaryTest = {}
 		self.switchSize = 0
 		# self.dictionaryTest[curX,curY] = state
 
@@ -34,7 +34,7 @@ class LedSwitcher:
 						if self.parseEachLine(line) != True:
 							self.applyValues(self.parseEachLine(line))
 			f.closed
-		return len(self.setTest)
+		return sum(self.dictionaryTest.values())
 
 	def parseEachLine(self, x):
 		"""this file parses the data from each line and returns a list with the results."""
@@ -78,16 +78,12 @@ class LedSwitcher:
 		"""a method for changing the state of the ledStateList with and an input position and state"""
 		tempTuple = (curX, curY)
 		if state is None:
-			if tempTuple in self.setTest:
-				self.setTest.remove(tempTuple)
-			else:
-				self.setTest.add(tempTuple)
-		elif state:
-			if tempTuple not in self.setTest:
-				self.setTest.add(tempTuple)
+			boolean = self.dictionaryTest.get(tempTuple, False)
+			boolean ^= True
+			self.dictionaryTest[tempTuple] = boolean
 		else:
-			if tempTuple in self.setTest:
-				self.setTest.remove(tempTuple)
+			self.dictionaryTest[tempTuple] = state
+
 
 	def applyValues(self, lineItem):
 		"""Apply the valus in the parseList to the ledStateList"""
