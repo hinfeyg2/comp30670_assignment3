@@ -6,35 +6,43 @@ class LedSwitcher:
 	def __init__(self, filename):
 
 		self.filename = filename
-		self.dictionaryTest = {}
+		# Will be set to how big the size of the LED array is.
 		self.switchSize = 0
-		# self.dictionaryTest[curX,curY] = state
+		# Will contain a list of each led and its associated state.
+		self.ledStateList = []
+
 
 	def parseFile(self):
 		"""This method opens the file containing the assigned data input.
 		It returns a list with each line in that file or url. It avoids empty lines."""
-
-		firstLineCount = 0
+		
+		count = 0
 		if self.filename[:4] == "http":
 			for line in urlopen(self.filename):
 				line = line.decode("utf-8")
 				line = line.strip()
-				if firstLineCount == 0:
+				if count == 0:
 					self.switchSize = int(line)
-					firstLineCount = firstLineCount + 1
+					self.createTemplate()
+					count = count + 1
 				elif len(line) > 1:
-					if self.parseEachLine(line) != True:
-						self.applyValues(self.parseEachLine(line))
-
+					self.applyValues(self.parseEachLine(line))
 		else:
 			with open(self.filename) as f:
 				self.switchSize = int(f.readline())
+				self.createTemplate()
 				for line in f:
 					if len(line) > 1:
-						if self.parseEachLine(line) != True:
-							self.applyValues(self.parseEachLine(line))
+						self.applyValues(self.parseEachLine(line))
 			f.closed
-		return sum(self.dictionaryTest.values())
+
+	def createTemplate(self):
+		"""This method gets the size of the current LED array."""
+		
+		for x in range(0, self.switchSize):
+			for y in range(0, self.switchSize):
+				self.ledStateList.append([False])
+
 
 	def parseEachLine(self, x):
 		"""this file parses the data from each line and returns a list with the results."""
@@ -72,31 +80,58 @@ class LedSwitcher:
 			yEnd = lineSplitSpaceList[3].split(",")[1].strip()
 			result = [None, max(0, min(int(xStart), self.switchSize - 1)), max(0, min(int(yStart), self.switchSize - 1)), max(0, min(int(xEnd), self.switchSize - 1)), max(0, min(int(yEnd), self.switchSize - 1))]
 			return result
-		return (True)
+		return ["BadFormat"]
+
 
 	def changeState(self, curX, curY, state):
 		"""a method for changing the state of the ledStateList with and an input position and state"""
-		tempTuple = (curX, curY)
-		if state is None:
-			boolean = self.dictionaryTest.get(tempTuple, False)
+
+		Index = (curX * self.switchSize) + curY
+		
+		if state == None:
+			boolean = self.ledStateList[Index][0]
 			boolean ^= True
-			self.dictionaryTest[tempTuple] = boolean
+			self.ledStateList[Index][0] = boolean
 		else:
-			self.dictionaryTest[tempTuple] = state
+			self.ledStateList[Index][0] = state
+
+		return self.ledStateList
 
 
 	def applyValues(self, lineItem):
 		"""Apply the valus in the parseList to the ledStateList"""
-		for a in range(lineItem[1], lineItem[3] + 1):
-			for b in range(lineItem[2], lineItem[4] + 1):
-				self.changeState(a, b, lineItem[0])
+		if lineItem[0] != "BadFormat":
+			counter = 0
+			for a in range(lineItem[1], lineItem[3] + 1):
+				for b in range(lineItem[2], lineItem[4] + 1):
+					self.changeState(a, b, lineItem[0])
+					counter = counter + 1
+			return(counter)
+
+
+	def getResult(self):
+		"""returns the result."""
+
+		counter = 0
+		for i in self.ledStateList:
+			if i[0] == True:
+				counter = counter + 1
+		print("")
+		print("Input File", self.filename)
+		print("Result", counter)
+		print("")
+		return counter
 
 def main():
 	"""This function is used when running the setup.py entry points."""
+
 	a = LedSwitcher(sys.argv[1])
-	print(a.parseFile())
+	a.parseFile()
+	print(a.getResult())
 
 if __name__ == '__main__':
 	"""Run this if its the root python file."""
+
 	a = LedSwitcher(sys.argv[1])
-	print(a.parseFile())
+	a.parseFile()
+	print(a.getResult())
