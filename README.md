@@ -57,8 +57,8 @@ Initializes lists and counters.
 Opens the file containing the assigned data input.
 It returns a list with each line in that file or url. It avoids empty lines.
 
-### getSize ###
-Gets the size of the current LED array from the first line of the input file.
+### createTemplate ###
+Create a tempate list of the size of the input.
 
 ### getParseLines ###
 Takes each line from the in the input file and convert it to something readable.
